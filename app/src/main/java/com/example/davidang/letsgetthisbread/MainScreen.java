@@ -11,6 +11,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.TextView;
@@ -28,6 +29,7 @@ public class MainScreen extends Fragment {
 
     TextView dateView;
     EditText enterAction, enterValue;
+    Button addTransaction;
 
     ListView listView;
 
@@ -57,36 +59,22 @@ public class MainScreen extends Fragment {
 
         enterAction = view.findViewById(R.id.enterAction);
         enterValue = view.findViewById(R.id.enterValue);
+        addTransaction = view.findViewById(R.id.addTransaction);
 
         listView = view.findViewById(R.id.listView);
 
+        // set typeface of all TextViews
         dateView.setTypeface(inconsolata);
         enterAction.setTypeface(inconsolata);
         enterValue.setTypeface(inconsolata);
 
-
+        //get current day to display at top of screen
         Calendar calendar = Calendar.getInstance();
         SimpleDateFormat mdformat = new SimpleDateFormat("MM / dd / yyyy");
 
         dateView.setText(mdformat.format(calendar.getTime()));
 
         currentDayArray = new ArrayList<>();
-        currentDayArray.add(new Transaction("nice meme", 20.54));
-        currentDayArray.add(new Transaction("nice meme", 20.54));
-        currentDayArray.add(new Transaction("nice meme", 20.54));
-        currentDayArray.add(new Transaction("nice meme", 20.54));
-        currentDayArray.add(new Transaction("nice meme", 20.54));
-        currentDayArray.add(new Transaction("nice meme", 20.54));
-        currentDayArray.add(new Transaction("nice meme", 20.54));
-        currentDayArray.add(new Transaction("nice meme", 20.54));
-        currentDayArray.add(new Transaction("nice meme", 20.54));
-        currentDayArray.add(new Transaction("nice meme", 20.54));
-        currentDayArray.add(new Transaction("nice meme", 20.54));
-        currentDayArray.add(new Transaction("nice meme", 20.54));
-        currentDayArray.add(new Transaction("nice meme", 20.54));
-        currentDayArray.add(new Transaction("nice meme", 20.54));
-        currentDayArray.add(new Transaction("nice meme", 20.54));
-        currentDayArray.add(new Transaction("nice meme", 20.54));
 
         stringArrayAdapter = new ArrayAdapter<>(view.getContext(), android.R.layout.simple_list_item_1, currentDayArray);
 
@@ -96,6 +84,19 @@ public class MainScreen extends Fragment {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
 
+            }
+        });
+
+        // on click listener for the add transaction button
+        addTransaction.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if(enterAction.getText().toString().length() > 0 && enterValue.getText().toString().length() > 0){
+                    currentDayArray.add(new Transaction(enterAction.getText().toString(),Double.parseDouble(enterValue.getText().toString())));
+                    enterAction.setText("");
+                    enterValue.setText("");
+                }
+                stringArrayAdapter.notifyDataSetChanged();
             }
         });
 
