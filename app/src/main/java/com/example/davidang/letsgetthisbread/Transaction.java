@@ -27,6 +27,6 @@ public class Transaction {
 
     @Override
     public String toString() {
-        return String.format("%s $%.2f", action, value);
+        return value >= 0 ? String.format("%s    $%.2f", action, value) : String.format("%s    -$%.2f", action, -value);
     }
 }

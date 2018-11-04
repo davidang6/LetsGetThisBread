@@ -23,20 +23,43 @@ public class Stats {
         this.difference = difference;
     }
 
+    /**
+     * Gets total gains
+     */
     public double getIncome() {
         return income;
     }
 
+    /**
+     * Gets total losses
+     */
     public double getExpenses() {
         return expenses;
     }
 
+    /**
+     * Gets the total change
+     */
     public double getDifference() {
         return difference;
     }
 
     public String toString(){
-        return String.format("Income: %d\nExpenses: %d\nTotal Change: %d",income,expenses,difference);
+        return String.format("Income: %s\nExpenses: %s\nNet Change: %s", incomeString(), expensesString(), differenceString());
     }
+
+    public String incomeString(){
+        return String.format("$%.2f", income);
+    }
+
+    public String expensesString(){
+        return expenses == 0 ?  String.format("-$%.2f",expenses) : String.format("-$%.2f",-expenses);
+    }
+
+    public String differenceString(){
+        return difference >= 0 ? String.format("$%.2f",difference) : String.format("-$%.2f",-difference);
+    }
+
+
 }
 

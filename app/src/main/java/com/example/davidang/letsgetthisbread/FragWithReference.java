@@ -1,44 +1,41 @@
 package com.example.davidang.letsgetthisbread;
 
-import android.os.Bundle;
-import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v4.view.ViewPager;
-import android.view.View;
+
 import android.widget.TextView;
+
+
 
 import java.util.Calendar;
 import java.util.HashMap;
 import java.util.ArrayList;
 
 
-public abstract class FragWithReference extends Fragment{
+public abstract class FragWithReference extends Fragment {
 
-    protected HashMap<String, ArrayList<Transaction>> allTransactions = new java.util.HashMap<>();
+    protected static HashMap<String, ArrayList<Transaction>> allTransactions = new HashMap<>();
 
-    protected ViewPager pager;
-    protected PagerAdapter adapter;
+    protected static ViewPager pager;
+    protected static RPagerAdapter adapter;
 
-    protected Calendar calendar = Calendar.getInstance();
+    protected static Calendar calendar = Calendar.getInstance();
     protected TextView dateView;
 
     // Dates
     protected int currentYear = calendar.get(Calendar.YEAR);
-    protected int currentMonth = calendar.get(Calendar.MONTH) + 1;
+    protected int currentMonth = calendar.get(Calendar.MONTH);
     protected int dayOfMonth = calendar.get(Calendar.DATE);
-    protected String date;
-
-    @Override
-    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState){
-        super.onViewCreated(view, savedInstanceState);
-        setRefs();
-    }
+    protected static String date;
 
 
-    private void setRefs(){
+    protected static MainActivity ref;
+
+
+
+    protected void setRefs(){
         // Get HashMap of all transactions from main activity
-        MainActivity ref = (MainActivity) getActivity();
+        ref = (MainActivity) getActivity();
         this.allTransactions = ref.getAllTransactions();
         this.pager = ref.getPager();
         this.adapter = ref.getAdapter();
@@ -47,7 +44,7 @@ public abstract class FragWithReference extends Fragment{
 
 
     public void setDate(int month, int day, int year){
-        date = String.format("%d / %d / %d", month, day, year);
+        this.date = getDate(month,day,year);
     }
 
     public void setDate(String date){
@@ -60,8 +57,10 @@ public abstract class FragWithReference extends Fragment{
     }
 
     protected String getDate(int month, int day, int year){
-        return String.format("%d / %d / %d", month, day, year);
+        return String.format("%d / %d / %d", month + 1, day, year);
     }
+
+
 
 
 
