@@ -10,6 +10,6 @@ Features:
 * User has the ability to view and edit other dates 
 
 Authors
-https://github.com/davidang6
-https://github.com/C3POrtillo
-https://github.com/moppr
+https://github.com/davidang6  
+https://github.com/C3POrtillo  
+https://github.com/moppr  
