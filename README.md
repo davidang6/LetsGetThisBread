@@ -9,7 +9,7 @@ Features:
 * Defaults to current date for ease of access and to streamline the process for the User
 * User has the ability to view and edit other dates 
 
-Authors
+Authors  
 https://github.com/davidang6  
 https://github.com/C3POrtillo  
 https://github.com/moppr  
